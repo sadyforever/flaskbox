@@ -63,7 +63,7 @@ def create_app(config_name):
 
     # 初始化redis数据库储存对象
     global redis_store
-    redis_store = StrictRedis(host=config[config_name].REDIS_HOST,port=config[config_name].REDIS_PORT)
+    redis_store = StrictRedis(host=config[config_name].REDIS_HOST, port=config[config_name].REDIS_PORT)
 
 
     # 3.小点

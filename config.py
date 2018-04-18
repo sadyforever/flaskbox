@@ -64,7 +64,7 @@ class TestingConfig(Config):
 
 # 一个变量   通过传入确定是哪种环境  开发还是生产
 config = {
-    'development': DevelopmentConfig,
-    'production':ProductionConfig,
-    'testing':TestingConfig
+    "development": DevelopmentConfig,
+    "production": ProductionConfig,
+    "testing": TestingConfig
 }

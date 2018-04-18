@@ -1,5 +1,7 @@
 from . import index_blu
+from info import redis_store
 
-@index_blu.route('/index')
+@index_blu.route('/')
 def index():
+    redis_store.set('name','laowang')
     return 'index'
