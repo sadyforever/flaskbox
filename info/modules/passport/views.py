@@ -1,6 +1,11 @@
-from flask import request, abort, current_app, make_response
+import random
+import re
+
+from flask import request, abort, current_app, make_response, json, jsonify
 
 from info import redis_store, constants
+from info.lib.yuntongxun.sms import CCP
+from info.utils.response_code import RET
 from . import passport_blu
 from  info.utils.captcha.captcha import captcha
 
@@ -40,7 +45,7 @@ def get_image_code():
 
     # 4.保存 随机值 和 验证码文字内容 到 redis中
     try:                 # key: 随机码            value:验证码文字内容          第三个参数是过期时间ex: 用了之前的小变量模块constants,其实就是一个数
-        redis_store.set('imageCodeId_' + image_code_id, text, constants.IMAGE_CODE_REDIS_EXPIRES)
+        redis_store.set('ImageCodeId_' + image_code_id, text) # constants.IMAGE_CODE_REDIS_EXPIRES
     except Exception as e:
         current_app.logger.error(e)   # 获取当前问题保存到log中
         abort(500)  # 服务器问题500
@@ -50,4 +55,92 @@ def get_image_code():
     # 设置响应内容的格式,怕有的浏览器不识别
     response.headers['Content-Type'] = 'image/jpg'
     return response
+
+
+
+
+# 手机验证码只能通过第三方平台来发送,第三方提供接口,根据指定要求把 电话号 验证码内容 发送给第三方
+# 云通信内的接口文件只支持2.7版本,用印哥给的
+# 第三方py文件放到lib文件夹内
+@passport_blu.route('/sms_code',methods=['POST'])
+def sms_code():
+    '''
+    1. 获取参数：手机号，验证码文字内容（校验），图片验证码的编号 (key)
+    2. 校验参数(参数是否符合规则，判断是否有值)
+    3. 用验证码编号redis中取出验证码文字
+    4. 验证码校验，不一致，验证码输入错误
+    5. 一致，生成短信验证码的内容(随机数据)
+    6. 发送短信验证码
+    7. 告知发送结果（倒计时）
+    :return:
+    '''
+
+
+    # 手机号:知道发给谁      图片验证码:判断验证码正确与否        验证码随机码: 从redis中取出验证码文字内容的key
+    # 发过来的数据是json格式,这是前端决定的,而且用了接口文档的形式,让你熟悉这种作业方式,见讲义
+    # {'mobile':'18811111111' , 'image_code':'ABCD' , 'image_code_id':'addasdasdasdasdas'}
+    # 1.获取参数        params 参数个数
+    # 后端接收json格式 解码成字典
+    # ? 后边的用args获取      post方式用data获取
+
+    # params_dict = json.loads(request.data) 可以直接写成
+    params_dict = request.json
+
+    mobile = params_dict['mobile']
+    image_code = params_dict['image_code']
+    image_code_id = params_dict['image_code_id']
+
+    # 2.校验参数(是否符合逻辑,是否为空)
+    if not all([mobile,image_code,image_code_id]):
+        # {"errno": "4100", "errmsg": "参数有误"}
+        # 必须按照公司指定的状态码给出,并且前端要求给出json格式
+
+        return jsonify(errno=RET.PARAMERR,errmsg='参数有误')
+
+    if not re.match(r'1[35678]\d{9}',mobile):
+        return jsonify(errno=RET.PARAMERR, errmsg="手机号格式不正确")
+
+    # 3.用验证码的编号 从redis中取出验证吗文字内容
+    # print(mobile + image_code + image_code_id)
+    try:
+        real_image_code = redis_store.get("ImageCodeId_" + image_code_id).decode()  # redis中取出的是byte类型
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="数据查询失败")
+
+    # print(real_image_code)
+    # 因为设置了过期时间,所以这个取不到值要考虑到
+    if not real_image_code:
+        return jsonify(errno=RET.NODATA, errmsg="图片验证码已过期")
+
+
+    # 4.校验   有个大小写区分的问题,这个需要单独考虑,如果用户都写的大写,我们也要支持
+    # 所以都大写或都小写
+    if real_image_code.upper() != image_code.upper():
+        return jsonify(errno=RET.DATAERR, errmsg="验证码输入错误")
+
+    # 5.校验一致,用第三方py文件生成随机验证码
+    # 变量第三方模块要用   %06d : 生成随机数  一共6位  位数不够用0在前边补充
+    sms_code_str = '%06d' % random.randint(0,999999)
+    current_app.logger.debug("短信验证码内容是：%s" % sms_code_str)
+    # 6.发送短信验证码
+    result = CCP().send_template_sms(mobile,[sms_code_str,60],'1')
+    if result != 0:
+        # 代表发送不成功  看第三方模块 0 成功  -1 不成功
+        return jsonify(errno=RET.THIRDERR, errmsg="发送短信失败")
+
+    # 保存验证码到redis ,都是验证身份的凭证
+    try:                            # 没设置过期时间
+        redis_store.set('SMS' + mobile,sms_code_str)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="数据保存失败")
+
+
+    # 如果成功,告知结果
+    return jsonify(errno=RET.OK, errmsg="发送成功")
+
+
+
+
 

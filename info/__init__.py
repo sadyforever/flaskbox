@@ -68,7 +68,7 @@ def create_app(config_name):
 
     # 3.小点
     # 开启CSRF验证
-    CSRFProtect(app)
+    # CSRFProtect(app)
     # 设置session保存指定位置,这个是flask中的session
     Session(app)
 
