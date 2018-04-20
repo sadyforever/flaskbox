@@ -74,10 +74,12 @@ def create_app(config_name):
 
 
     # 注册蓝图
+    # 主页
     from info.modules.index import index_blu  # 蓝图尽量保持哪用在哪引入
     app.register_blueprint(index_blu)
-
-
+    # 注册
+    from info.modules.passport import passport_blu
+    app.register_blueprint(passport_blu)
 
     # 必须返回app 给到manager接收
     return app

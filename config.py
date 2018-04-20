@@ -26,7 +26,7 @@ class Config(object):
 
 
 
-    # redis数据库中内置的内容,考虑的把session储存在内存数据库
+    # flask框架的session
 
     # Session保存配置
     SESSION_TYPE = "redis"

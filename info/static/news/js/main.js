@@ -148,11 +148,19 @@ $(function(){
     })
 })
 
+// 这个随机码写成全局的变量了,别的地方需要用到,如果放在函数中别地方用不了
 var imageCodeId = ""
 
 // TODO 生成一个图片验证码的编号，并设置页面中图片验证码img标签的src属性
 function generateImageCode() {
-
+    // 这个随机码通过 UUID这种生成随机码的类来创建,它是通用的保证不会重复涉及到算法了,反正它创建的对象就是随机码
+    imageCodeId = generateUUID()
+    // 这个时候随机码有了,我们拼接地址,用拼接地址替代src,这样我们就控制了请求的方向,也就能得到参数了
+    var url = '/passport/image_code?imageCodeId=' + imageCodeId
+    // 替换图片的src这样第一次请求的加载和onclick的加载都是我们控制的
+    // $('.get_pic_code').attr('src',url)
+    // attr方法操作标签和html和prop相同,只不过它有两个参数,prop也能实现
+    $('.get_pic_code').prop('src',url)
 }
 
 // 发送短信验证码
