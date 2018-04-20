@@ -1,10 +1,12 @@
+from datetime import datetime
 import random
 import re
 
-from flask import request, abort, current_app, make_response, json, jsonify
+from flask import request, abort, current_app, make_response, json, jsonify, session
 
-from info import redis_store, constants
+from info import redis_store, constants, db
 from info.lib.yuntongxun.sms import CCP
+from info.models import User
 from info.utils.response_code import RET
 from . import passport_blu
 from  info.utils.captcha.captcha import captcha
@@ -131,7 +133,7 @@ def sms_code():
 
     # 保存验证码到redis ,都是验证身份的凭证
     try:                            # 没设置过期时间
-        redis_store.set('SMS' + mobile,sms_code_str)
+        redis_store.set('SMS_' + mobile,sms_code_str)
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=RET.DBERR, errmsg="数据保存失败")
@@ -139,6 +141,75 @@ def sms_code():
 
     # 如果成功,告知结果
     return jsonify(errno=RET.OK, errmsg="发送成功")
+
+
+
+@passport_blu.route('/register',methods=['POST'])
+def register():
+    '''
+    1.获取参数(手机号, 短信验证码,密码)
+    2.校验参数
+    3.用mobile取到redis中的短信验证码并校验
+    4.一致,初始化User对象,并赋值
+    5.user添加到数据库
+    6.返回结果
+    :return:
+    '''
+
+    # 1.获取参数
+    params_dict = request.json
+    mobile = params_dict['mobile']
+    smscode = params_dict['smscode']
+    password = params_dict['password']
+
+    # 2.校验参数
+    if not all([mobile,smscode,password]):
+        return jsonify(errno=RET.PARAMERR,errmsg='参数不能为空')
+    # 校验手机号是否正确
+    if not re.match('1[35678]\\d{9}', mobile):
+        return jsonify(errno=RET.PARAMERR, errmsg="手机号格式不正确")
+
+    # 3.校验短信验证码
+    try:
+        real_sms_code = redis_store.get('SMS_'+mobile)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR,errmsg='数据查询失败')
+    if not real_sms_code:
+        return jsonify(errno=RET.NODATA,errmsg='验证码已过期')
+
+    if real_sms_code.decode() != smscode:
+        return jsonify(errno=RET.DATAERR, errmsg="验证码输入错误")
+
+
+    # 4.一致,初始化User对象,并且赋值
+    user = User()
+    user.mobile = mobile
+    # 用户昵称暂时没有 ,使用手机号代替
+    user.nick_name = mobile
+    # 记录用户最后一次登录的时间
+    user.last_login = datetime.now()   # 注意这个的引入
+    # TODO 对密码加密
+
+
+    # 5.添加到数据库 ,没有智能提示为什么
+    try:
+        db.session.add(user)
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg="数据保存失败")
+
+    # 因为注册完直接跳转已经登录的页面,所以需要直接给到cookie
+    # 所以直接往session中保存数据表示当前已经登录
+    session['user_id'] = user.id
+    session["mobile"] = user.mobile
+    session["nick_name"] = user.nick_name
+
+    # 7. 返回响应
+    return jsonify(errno=RET.OK, errmsg="注册成功")
+
 
 
 

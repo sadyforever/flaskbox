@@ -145,6 +145,27 @@ $(function(){
 
         // 发起注册请求
 
+        var params = {
+        "mobile": mobile,
+        "smscode": smscode,
+        "password": password,
+    }
+
+        $.ajax({
+            url:"/passport/register",
+            type: "post",
+            data: JSON.stringify(params),
+            contentType: "application/json",
+            success: function (resp) {
+                if (resp.errno == "0"){
+                    // 刷新当前界面
+                    location.reload()
+                }else {
+                    $("#register-password-err").html(resp.errmsg)
+                    $("#register-password-err").show()
+                }
+            }
+        })
     })
 })
 
@@ -190,7 +211,7 @@ function sendSMSCode() {
         "image_code_id": imageCodeId  // 这个是全局变量,页面没整体刷新,所以还在
     }
 
-    // 发起注册请求
+    // 发起短信验证码请求
     $.ajax({
         // 请求地址
         url: "/passport/sms_code",

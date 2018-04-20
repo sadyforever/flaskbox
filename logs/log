@@ -365,3 +365,116 @@ INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:09:49] "GET /passport/image_c
 INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:09:51] "GET /passport/image_code?imageCodeId=7c50fafa-c9b8-4f7f-8bf9-0f2eb9b7fd2f HTTP/1.1" 200 -
 DEBUG views.py:125 短信验证码内容是：480002
 INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:10:09] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:26:13] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:26:15] "GET /passport/image_code?imageCodeId=485f8255-0966-4703-b21c-3a53b05f52ff HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:26:16] "GET /passport/image_code?imageCodeId=81ade897-32c1-42e4-b564-c9cec29b5151 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:26:17] "GET /passport/image_code?imageCodeId=e7acb29c-cd97-41e1-87e0-da6189d2c7b9 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:26:18] "GET /passport/image_code?imageCodeId=705b81e8-863c-4d44-8bce-a00574a28b0e HTTP/1.1" 200 -
+DEBUG views.py:125 短信验证码内容是：814797
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:26:29] "POST /passport/sms_code HTTP/1.1" 200 -
+DEBUG views.py:125 短信验证码内容是：245315
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:27:40] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:29:15] "GET /passport/image_code?imageCodeId=13cfc733-d7b1-438a-8ab0-9e55b8aa3a7a HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:29:19] "GET /passport/image_code?imageCodeId=ca4ffd7f-b619-497a-a0a5-547c9adeb92b HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:29:21] "GET /passport/image_code?imageCodeId=ecac6d83-c5bc-4dfe-a0e2-a7cb06734693 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:29:23] "GET /passport/image_code?imageCodeId=2e9f5bfd-ecc8-4365-b777-c93d693240b8 HTTP/1.1" 200 -
+DEBUG views.py:125 短信验证码内容是：452421
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:29:31] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:31:18] "GET /passport/image_code?imageCodeId=28d091a0-d340-4068-8f24-af05fdb16409 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:31:19] "GET /passport/image_code?imageCodeId=63b2badf-9742-45a5-af49-c845cd966bca HTTP/1.1" 200 -
+DEBUG views.py:125 短信验证码内容是：486559
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:31:26] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/passport/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+DEBUG views.py:125 短信验证码内容是：236449
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:31:47] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:11] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/css/main.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/js/main.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/js/index.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/images/logo.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/images/person01.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/images/news_pic.jpg HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/images/person.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/images/pic_code.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/images/hit_icon.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:25] "GET /static/news/images/clock.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:29] "GET /passport/image_code?imageCodeId=9d9fc383-1ebe-4b9e-9953-03b921c12440 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:29] "GET /static/news/images/shutoff.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:36] "GET /passport/image_code?imageCodeId=31335707-2779-4663-af04-f11b775ccadd HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:37] "GET /passport/image_code?imageCodeId=4c18a4e8-2521-404c-8ee9-2dd4a0aceb6e HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:40] "GET /passport/image_code?imageCodeId=b7b54fc9-82fc-4cd8-9f86-861352905a79 HTTP/1.1" 200 -
+DEBUG views.py:125 短信验证码内容是：646721
+INFO _internal.py:88 127.0.0.1 - - [20/Apr/2018 23:37:56] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:15:38] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:16:17] "GET /passport/image_code?imageCodeId=f800fcb0-3ea1-4309-8b9c-7059cf3cc255 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:25:39] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:25:44] "GET /passport/image_code?imageCodeId=267cb909-870e-481d-b596-b0ead8e133e7 HTTP/1.1" 200 -
+DEBUG views.py:127 短信验证码内容是：840627
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:26:45] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:02] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:27] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:27] "GET /static/news/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:27] "GET /static/news/css/main.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:27] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:27] "GET /static/news/js/main.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:27] "GET /static/news/js/index.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:28] "GET /static/news/images/logo.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:28] "GET /static/news/images/person01.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:28] "GET /static/news/images/news_pic.jpg HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:28] "GET /static/news/images/person.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:28] "GET /static/news/images/pic_code.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:28] "GET /static/news/images/hit_icon.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:28] "GET /static/news/images/clock.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:46] "GET /passport/image_code?imageCodeId=f4ed8f90-9a0f-4719-85e5-47e2eaac7286 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:28:46] "GET /static/news/images/shutoff.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:30:08] "POST /passport/register HTTP/1.1" 200 -
+DEBUG views.py:127 短信验证码内容是：890433
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:30:41] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:30:57] "POST /passport/register HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:31:07] "POST /passport/register HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:31:10] "POST /passport/register HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:33:11] "POST /passport/register HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:33:28] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:33:33] "GET /passport/image_code?imageCodeId=411a57cd-1456-4fef-bcd3-8a1a31016831 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:33:42] "GET /passport/image_code?imageCodeId=5341327e-aa83-47e2-8cab-db2b3e6af2f3 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:33:43] "GET /passport/image_code?imageCodeId=0d7fa4a0-f95e-4c8b-9bea-67e547e91946 HTTP/1.1" 200 -
+DEBUG views.py:127 短信验证码内容是：630317
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:33:47] "POST /passport/sms_code HTTP/1.1" 200 -
+ERROR views.py:200 add() missing 1 required positional argument: 'instance'
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:34:16] "POST /passport/register HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/passport/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+ERROR views.py:200 (_mysql_exceptions.OperationalError) (1048, "Column 'password_hash' cannot be null") [SQL: 'INSERT INTO info_user (create_time, update_time, nick_name, password_hash, mobile, avatar_url, last_login, is_admin, signature, gender) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'] [parameters: (datetime.datetime(2018, 4, 21, 0, 35, 24, 148237), datetime.datetime(2018, 4, 21, 0, 35, 24, 148249), '15311777020', None, '15311777020', None, datetime.datetime(2018, 4, 21, 0, 35, 23, 978819), 0, None, 'MAN')] (Background on this error at: http://sqlalche.me/e/e3q8)
+INFO _internal.py:88 127.0.0.1 - - [21/Apr/2018 00:35:24] "POST /passport/register HTTP/1.1" 200 -
