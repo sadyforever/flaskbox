@@ -174,16 +174,13 @@ def register():
 
     # 判断手机号是否已存在
     # 查询数据库有问题,没实现
-    # try:
-    #     had_mobile = User.query.filter(User.mobile == mobile).first()
-    #
-    # except Exception as e:
-    #     current_app.logger.error(e)
-    # if mobile == had_mobile:
-    #     return jsonify(errno=RET.DATAEXIST,errmsg='手机号码已经存在')
-    # print('*' * 20)
-    # print(User.query.filter(User.mobile == mobile).first())
-    # print('*'*20)
+    try:
+        user = User.query.filter(User.mobile == mobile).first()
+    except Exception as e:
+        current_app.logger.error(e)
+    if  user:
+        return jsonify(errno=RET.DATAEXIST,errmsg='用户已经存在')
+
 
 
 
@@ -244,4 +241,65 @@ def register():
 
 
 
+@passport_blu.route('/login',methods=['POST'])
+def login():
+    '''
+    1.获取参数
+    2.校验参数
+    3.从sql中取出用户数据
+    4.校验mobile和password
+    5.登录成功返回session在cookie中
+    :return:
+    '''
+    # 1.获取参数
+    params_dict = request.json
+    mobile = params_dict['mobile']
+    password = params_dict['password']
+    # 2.校验参数
+    if not all([mobile,password]):
+        return jsonify(errno=RET.PARAMERR, errmsg="参数错误")
 
+    # 校验手机号是否正确
+    if not re.match('1[35678]\\d{9}', mobile):
+        return jsonify(errno=RET.PARAMERR, errmsg="手机号格式不正确")
+
+    # 3. 校验密码是否正确
+    # 先查询出当前是否有指定手机号的用户
+    try:
+        user = User.query.filter(User.mobile == mobile).first()
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="数据查询错误")
+    # 判断用户是否存在
+    if not user:
+        return jsonify(errno=RET.NODATA, errmsg="用户不存在")
+
+    # 校验登录的密码和当前用户的密码是否一致
+    # 使用user中的check_password函数来验证,其实为了使用Werkzeug工具集的check_password_hash
+    # 帮我们取到password_hash的加密密码,和用户输入的明文密码校验
+    if not user.check_password(password):
+        return jsonify(errno=RET.PWDERR, errmsg="用户名或者密码错误")
+
+
+    # 4.保存用户登录状态
+    session['user_id'] = user.id
+    session["mobile"] = user.mobile
+    session["nick_name"] = user.nick_name
+
+    # 设置当前用户最后一次登录的时间
+    user.last_login = datetime.now()
+    # try:
+    #     db.session.commit()
+    # except Exception as e:
+    #     db.session.rollback()
+    #     current_app.logger.error(e)
+    # 如果在视图函数中，对模型身上的属性有修改，那么需要commit到数据库保存
+    # 但是其实可以不用自己去写 db.session.commit(),前提是对SQLAlchemy有过相关配置
+    # 其实unique也可以改变值,只不过是在当前字段内唯一而已
+    # SQLALCHEMY_COMMIT_ON_TEARDOWN = True 这个配置就不需要我们手动commit了,只要有更改自动提交
+
+    # 5. 响应
+    print('&')
+    return jsonify(errno=RET.OK, errmsg="登录成功")
+
+    # TODO CSRF设置

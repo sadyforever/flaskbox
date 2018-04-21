@@ -69,9 +69,9 @@ class User(BaseModel, db.Model):
         self.password_hash = generate_password_hash(value)
                         # 后边这个函数就是Werkzeug工具集提供的
 
-
-
-
+    def check_password(self,password):
+        '''校验密码'''
+        return check_password_hash(self.password_hash,password)
 
     # 当前用户所发布的新闻
     news_list = db.relationship('News', backref='user', lazy='dynamic')
