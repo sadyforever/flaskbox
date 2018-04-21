@@ -20,7 +20,7 @@ from config import config
 
 # 初始化数据库
 #  在Flask很多扩展里面都可以先初始化扩展的对象，然后再去调用 init_app 方法去初始化
-db = SQLAlchemy()
+db = SQLAlchemy() # type :
 
 
 # https://www.cnblogs.com/xieqiankun/p/type_hints_in_python3.html
