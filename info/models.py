@@ -55,6 +55,24 @@ class User(BaseModel, db.Model):
                                 backref=db.backref('followed', lazy='dynamic'),
                                 lazy='dynamic')
 
+
+    # 用password给password_hash添加内容的实现
+    # @property装饰器把类中的函数变成属性
+    @property
+    def password(self):
+        raise AttributeError('当前属性不允许读取')   #密码是不允许取值的
+
+    # 给password属性函数再添加装饰器  实现把password给到password_hash
+    @password.setter
+    def password(self,value):
+        # self.password_hash = 对value加密
+        self.password_hash = generate_password_hash(value)
+                        # 后边这个函数就是Werkzeug工具集提供的
+
+
+
+
+
     # 当前用户所发布的新闻
     news_list = db.relationship('News', backref='user', lazy='dynamic')
 

@@ -47,7 +47,7 @@ def get_image_code():
 
     # 4.保存 随机值 和 验证码文字内容 到 redis中
     try:                 # key: 随机码            value:验证码文字内容          第三个参数是过期时间ex: 用了之前的小变量模块constants,其实就是一个数
-        redis_store.set('ImageCodeId_' + image_code_id, text) # constants.IMAGE_CODE_REDIS_EXPIRES
+        redis_store.set('ImageCodeId_' + image_code_id, text,300) # constants.IMAGE_CODE_REDIS_EXPIRES
     except Exception as e:
         current_app.logger.error(e)   # 获取当前问题保存到log中
         abort(500)  # 服务器问题500
@@ -125,15 +125,15 @@ def sms_code():
     # 变量第三方模块要用   %06d : 生成随机数  一共6位  位数不够用0在前边补充
     sms_code_str = '%06d' % random.randint(0,999999)
     current_app.logger.debug("短信验证码内容是：%s" % sms_code_str)
-    # 6.发送短信验证码
-    result = CCP().send_template_sms(mobile,[sms_code_str,60],'1')
-    if result != 0:
-        # 代表发送不成功  看第三方模块 0 成功  -1 不成功
-        return jsonify(errno=RET.THIRDERR, errmsg="发送短信失败")
+    # # 6.发送短信验证码
+    # result = CCP().send_template_sms(mobile,[sms_code_str,60],'1')
+    # if result != 0:
+    #     # 代表发送不成功  看第三方模块 0 成功  -1 不成功
+    #     return jsonify(errno=RET.THIRDERR, errmsg="发送短信失败")
 
     # 保存验证码到redis ,都是验证身份的凭证
     try:                            # 没设置过期时间
-        redis_store.set('SMS_' + mobile,sms_code_str)
+        redis_store.set('SMS_' + mobile, sms_code_str , 300 )
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=RET.DBERR, errmsg="数据保存失败")
@@ -169,6 +169,28 @@ def register():
     if not re.match('1[35678]\\d{9}', mobile):
         return jsonify(errno=RET.PARAMERR, errmsg="手机号格式不正确")
 
+
+
+
+    # 判断手机号是否已存在
+    # 查询数据库有问题,没实现
+    # try:
+    #     had_mobile = User.query.filter(User.mobile == mobile).first()
+    #
+    # except Exception as e:
+    #     current_app.logger.error(e)
+    # if mobile == had_mobile:
+    #     return jsonify(errno=RET.DATAEXIST,errmsg='手机号码已经存在')
+    # print('*' * 20)
+    # print(User.query.filter(User.mobile == mobile).first())
+    # print('*'*20)
+
+
+
+
+
+
+
     # 3.校验短信验证码
     try:
         real_sms_code = redis_store.get('SMS_'+mobile)
@@ -190,11 +212,19 @@ def register():
     # 记录用户最后一次登录的时间
     user.last_login = datetime.now()   # 注意这个的引入
     # TODO 对密码加密
+    # 需求：在设置 password 的时候，去对 password 进行加密，并且将加密结果给 user.password_hash 赋值
+    # 表中的密码是password_hash 而不是password,建议在数据库储存的是加密后的密码
+    # 在这把用户输入的密码赋值给user.password,在User类中添加password方法,这样赋值就合理了
+    # 而python高级中的@propery方法,可以把class中的一个函数当做属性来用
+    # 其实核心是想要使用Werkzeug工具集中的密码 加密 和 验证 函数
+    # 具体更改看models模块给class User 添加@propery方法
+    user.password = password
+
 
 
     # 5.添加到数据库 ,没有智能提示为什么
     try:
-        db.session.add(user)
+        db.session.add(user)    # 因为有的字段唯一unquite,所以手机号重复到这也不能保存
         db.session.commit()
     except Exception as e:
         current_app.logger.error(e)
