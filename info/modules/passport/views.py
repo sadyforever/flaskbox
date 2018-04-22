@@ -307,3 +307,30 @@ def login():
     return jsonify(errno=RET.OK, errmsg="登录成功")
 
     # TODO CSRF设置
+
+
+
+@passport_blu.route("/logout", methods=['POST','GET'])
+def logout():
+    """
+    清除session中的对应登录之后保存的信息
+    :return:
+    """
+    # pop方法,必须有None虽然正常逻辑没事肯定能删除,但是这是防测试的,严谨一些
+    session.pop('user_id', None)
+    session.pop('nick_name', None)
+    session.pop('mobile', None)
+
+    # 返回结果
+    return jsonify(errno=RET.OK, errmsg="OK")
+
+'''
+前端逻辑:
+function logout() {
+    $.get('/passport/logout', function (resp) {
+        location.reload()
+    })
+}
+
+'''
+
