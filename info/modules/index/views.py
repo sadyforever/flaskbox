@@ -1,7 +1,11 @@
 from flask import render_template, current_app, session, flash
 
-from info.models import User, News
+from info.models import User, News, Category
 from . import index_blu
+
+
+
+
 
 
 @index_blu.route('/')
@@ -61,15 +65,13 @@ def index():
 
 
 
+    # 3.新闻最上边的分类
+    # 查询分类，通过模板的形式渲染出来
+    categories = Category.query.all()
 
-
-
-
-
-
-
-
-
+    category_li = []
+    for category in categories:
+        category_li.append(category.to_dict())
 
 
 
@@ -78,6 +80,7 @@ def index():
     data = {        # models中的to_dict方法,返回字典
         'user': user.to_dict() if user else None,    # 这个相当于三元表达式,又像函数推导式: 用户存在则执行方法,不存在就是None,用三元的原因也是None不能使用to_dict方法,报错:NoneType' object has no attribute 'to_dict
         "news_dict_li": news_dict_li,
+        'category_li':category_li
     }
     # flash(data)使用消息闪现data是{ key : 对象模型  }  所以从sql数据库中查询出来的内容是对象模型,所以要遍历所以要用 什么.什么 的方法
     # data = {'user': {'id': 11, 'nick_name': '18811110000', 'avatar_url': '', 'mobile': '18811110000', 'gender': 'MAN', 'signature': '', 'followers_count': 0, 'news_count': 0}}
