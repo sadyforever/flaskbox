@@ -74,6 +74,12 @@ def create_app(config_name):
     Session(app)
 
 
+    from info.utils.common import do_index_class
+    # 添加自定义过滤器                           过滤器名字
+    app.add_template_filter(do_index_class, "index_class")
+
+
+
     # 使用请求钩子设置cookie
     @app.after_request
     def after_request(response):
