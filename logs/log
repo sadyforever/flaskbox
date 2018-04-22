@@ -330,3 +330,161 @@ INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 11:09:59] "POST /passport/regist
 INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 11:09:59] "GET / HTTP/1.1" 200 -
 INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 11:10:28] "POST /passport/login HTTP/1.1" 200 -
 INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 11:10:28] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 11:16:11] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 11:16:20] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:03:41] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:03:49] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:04:31] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:05:16] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:11:02] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:11:56] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:21] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:29] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:36] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:36] "GET /static/news/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:36] "GET /static/news/css/main.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:36] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:36] "GET /static/news/js/main.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:36] "GET /static/news/js/index.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:36] "GET /static/news/images/logo.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:36] "GET /static/news/images/person01.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:37] "GET /static/news/images/news_pic.jpg HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:37] "GET /static/news/images/person.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:37] "GET /static/news/images/pic_code.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:37] "GET /static/news/images/hit_icon.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:12:37] "GET /static/news/images/clock.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:13:57] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:14:50] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/css/main.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/js/main.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/js/index.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/images/logo.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/images/news_pic.jpg HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/images/person.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/images/pic_code.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/images/hit_icon.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:18] "GET /static/news/images/clock.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:22] "GET /static/news/images/shutoff.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:32] "POST /passport/login HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:32] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 12:18:32] "GET /static/news/images/person01.png HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:50:13] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:50:27] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:56:21] "GET / HTTP/1.1" 500 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:56:21] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:56:21] "GET /?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:56:21] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:56:21] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:56:21] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 19:56:21] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/css/main.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/js/main.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/js/index.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/images/logo.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/images/news_pic.jpg HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/images/person.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/images/pic_code.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/images/hit_icon.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:49] "GET /static/news/images/clock.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:03:52] "GET /static/news/images/shutoff.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:04:00] "POST /passport/login HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:04:00] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:04:01] "GET /static/news/images/person01.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:04:22] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:07:52] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:07:58] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:08:47] "GET / HTTP/1.1" 500 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:08:47] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:08:47] "GET /?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:08:47] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:08:47] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:08:47] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:08:47] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskproject/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 144-336-494
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:39] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/css/main.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/js/main.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/js/index.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/images/logo.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/images/news_pic.jpg HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/images/person.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/images/pic_code.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/images/hit_icon.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:40] "GET /static/news/images/clock.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:43] "GET /static/news/images/shutoff.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:49] "POST /passport/login HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:49] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [22/Apr/2018 20:09:49] "GET /static/news/images/person01.png HTTP/1.1" 200 -
