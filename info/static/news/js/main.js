@@ -125,9 +125,13 @@ $(function(){
             contentType: "application/json",
             //TODO CSRF设置
             // 在 header 中添加 csrf_token 的随机值
-            // headers: {
-            //     "X-CSRFToken": getCookie('csrf_token')
-            // },
+            // ajax阻止了表单提交部分刷新,所以只能通过header把csrf带给服务器
+            // 而写法是由前端页面中写的格式来获取的 headers:{} 这个没有异议
+            //                  getCookie是从cookie中获取csrf的函数,在最下边前端自己写的
+            // 而X-CSRFToken是固定的写法在flask模块csrf中固定写法X-CSRFToken,改名不行
+            headers: {
+                "X-CSRFToken": getCookie('csrf_token')
+            },
             data: JSON.stringify(params),
             success: function (resp) {
                 if (resp.errno == "0") {
@@ -187,6 +191,9 @@ $(function(){
             type: "post",
             data: JSON.stringify(params),
             contentType: "application/json",
+            headers: {
+                "X-CSRFToken": getCookie('csrf_token')
+            },
             success: function (resp) {
                 if (resp.errno == "0"){
                     // 刷新当前界面
@@ -252,6 +259,9 @@ function sendSMSCode() {
         data: JSON.stringify(params),
         // 请求参数的数据类型
         contentType: "application/json",
+        headers: {
+                "X-CSRFToken": getCookie('csrf_token')
+            },
         success: function (response) {
             if (response.errno == "0") {
                 // 代表发送成功

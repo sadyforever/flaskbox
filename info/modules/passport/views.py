@@ -282,6 +282,10 @@ def login():
 
 
     # 4.保存用户登录状态
+    # session用于储存用户的敏感信息,这个是不能发给cookie的,如果没设置cookie那么发过去的就是session
+    # 用户请求登录,账号和密码我们获取到了,储存了session还需要设置cookie
+    # 而cookie设置在 app的初始化中 使用请求钩子 after.request 每次请求给出响应结果都执行
+    # 这样cookie中设置了csrf,csrf其实是每次的验证在涉及到身份信息的时候
     session['user_id'] = user.id
     session["mobile"] = user.mobile
     session["nick_name"] = user.nick_name
