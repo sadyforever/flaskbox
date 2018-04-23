@@ -1,10 +1,75 @@
-from flask import render_template, current_app, session, flash
+from flask import render_template, current_app, session, flash, request, jsonify
 
 from info.models import User, News, Category
+from info.utils.response_code import RET
 from . import index_blu
 
 
+@index_blu.route('/news_list')
+def news_list():
+    '''
+    首页新闻数据
+    :return:
+    '''
+    # 1.获取参数
+    # 新闻的分类id
+    cid = request.args.get('cid','1')
+    page = request.args.get('page','1')
+    per_page = request.args.get('per_page','10')
 
+    # 2.校验参数
+    try:        # 防止前端传过来字符串   比如 哈哈 转int型转不了 而要是 '1' 这种没问题
+        page = int(page)
+        cid = int(cid)
+        per_page = int(per_page)
+
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.PARAMERR, errmsg="参数错误")
+
+
+    # 判断查询的是哪个分类,默认开始是最新分类,即cid = 1
+    # 而如果点击事件发生,分类改变了获取cid
+    # 不同的cid说明我们查询的分类不同,其实就是 filter过滤器中的条件不同
+    # 最新:是所有新闻并按照时间排序
+    # 其他类: 其他类的所有(按照类别)
+    # 我们创建一个过滤器的列表,之后把他当做查询条件放进去
+    # 使用*args的格式就可以让 具体参数是列表中的内容 而不包括[]符号
+    filters = []
+    if cid != 1:        #  查询的不是最新的数据
+        # 需要添加的条件
+        filters.append(News.category_id == cid)
+
+    # 3.查询数据
+    try:                            # *args的格式放进来                               # TODO 研究到这了 # 第1个参数代表查询第几页，第2个参数代表每页几个
+        paginate = News.query.filter(*filters).order_by(News.create_time.desc()).paginate(page, per_page, False)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="数据查询错误")
+
+    #  TODO  取到当前页的数据
+    '''
+        paginate.items 当前页数据
+        paginate.pages 总页数
+        paginate.page  当前页
+    '''
+    # 模型对象列表
+    news_model_list = paginate.items
+    total_page = paginate.pages
+    current_page = paginate.page
+
+    # 将模型对象列表转成字典列表
+    news_dict_li = []
+    for news in news_model_list:
+        news_dict_li.append(news.to_basic_dict())
+
+    data = {
+        "total_page": total_page,
+        "current_page": current_page,
+        "news_dict_li": news_dict_li
+    }
+    # print('&')
+    return jsonify(errno=RET.OK, errmsg="OK", data=data)
 
 
 
