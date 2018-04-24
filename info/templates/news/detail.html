@@ -26,17 +26,26 @@
 
 
 {# TODO #}
+{% if not data.user %}
 <div class="comment_form_logout">
     登录发表你的评论
 </div>
+{% else %}
+<form action="" class="comment_form" data-newsid="{{ data.news.id }}">
+                <div class="person_pic">
+                    <img src="{% if data.user.avatar_url %}
+                        {{ data.user.avatar_url }}
+                    {% else %}
+                        ../../static/news/images/person01.png
+                    {% endif %}" alt="用户图标">
+                </div>
+                <textarea placeholder="请发表您的评论" class="comment_input"></textarea>
+                <input type="submit" name="" value="评 论" class="comment_sub">
+            </form>
+{% endif %}
 
-<form action="" class="comment_form">
-    <div class="person_pic">
-        <img src="../../static/news/images/cat.jpg" alt="用户图标">
-    </div>
-    <textarea placeholder="请发表您的评论" class="comment_input"></textarea>
-    <input type="submit" name="" value="评 论" class="comment_sub">
-</form>
+
+
 
 {#  这是评论      #}
 <div class="comment_count">
