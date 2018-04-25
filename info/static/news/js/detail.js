@@ -13,6 +13,7 @@ $(function(){
 
     // 收藏
     $(".collection").click(function () {
+
         var params = {
             "news_id": $(this).attr('data-newid'),
             "action": "collect"
@@ -39,7 +40,7 @@ $(function(){
                 }
             }
         })
-       
+
     })
 
     // 取消收藏
@@ -73,8 +74,7 @@ $(function(){
 
     })
 
-
-        // 评论提交
+    // 评论提交
     $(".comment_form").submit(function (e) {
         e.preventDefault();
         var news_id = $(this).attr('data-newsid')
@@ -152,19 +152,69 @@ $(function(){
         {
             $(this).parent().toggle();
         }
-
+        // 点赞按钮
         if(sHandler.indexOf('comment_up')>=0)
         {
             var $this = $(this);
+            // 设置默认的点赞还是取消点赞的操作【默认是点赞】
+            var action = "add"
             if(sHandler.indexOf('has_comment_up')>=0)
             {
                 // 如果当前该评论已经是点赞状态，再次点击会进行到此代码块内，代表要取消点赞
-                $this.removeClass('has_comment_up')
-            }else {
-                $this.addClass('has_comment_up')
+                action = "remove"
             }
+
+            var comment_id = $(this).attr("data-commentid")
+            var params = {
+                "comment_id": comment_id,
+                "action": action,
+            }
+
+            $.ajax({
+                url: "/news/comment_like",
+                type: "post",
+                contentType: "application/json",
+                headers: {
+                    "X-CSRFToken": getCookie("csrf_token")
+                },
+                data: JSON.stringify(params),
+                success: function (resp) {
+                    if (resp.errno == "0") {
+                        // 更新点赞按钮图标
+                        var like_count = $this.attr('data-likecount')
+                        // 更新点赞按钮图标
+                        if (action == "add") {
+                            like_count = parseInt(like_count) + 1
+                            // 代表是点赞
+                            $this.addClass('has_comment_up')
+                        }else {
+                            like_count = parseInt(like_count) - 1
+                            $this.removeClass('has_comment_up')
+                        }
+                        // 更新点赞数据
+                        $this.attr('data-likecount', like_count)
+                        if (like_count == 0) {
+                            $this.html("赞")
+                        }else {
+                            $this.html(like_count)
+                        }
+                    }else if (resp.errno == "4101"){
+                        $('.login_form_con').show();
+                    }else {
+                        alert(resp.errmsg)
+                    }
+                }
+            })
         }
-        // 评论已有的评论
+
+
+
+
+
+
+
+
+        // 评论已有评论
         if(sHandler.indexOf('reply_sub')>=0)
         {
             var $this = $(this)
@@ -237,6 +287,7 @@ $(function(){
             })
         }
     })
+
         // 关注当前新闻作者
     $(".focus").click(function () {
 
@@ -248,7 +299,6 @@ $(function(){
     })
 })
 
-// 更新评论条数
 function updateCommentCount() {
     var count = $(".comment_list").length
     $(".comment_count").html(count+"条评论")

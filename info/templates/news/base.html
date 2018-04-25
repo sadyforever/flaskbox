@@ -45,7 +45,7 @@
                     {% else %}
                     ../../static/news/images/person01.png
                     {% endif %}" class="lgin_pic">
-                    <a href="#">{{ data.user.nick_name }}</a>
+                    <a href="/user/info">{{ data.user.nick_name }}</a>
                     <a href="javascript:;" onclick="logout()">退出</a>
                 </div>
             {% else %}
@@ -67,6 +67,7 @@
 {% endblock %}
 
 
+{% block rankBlock %}
 
     <!-- 右侧点击排行 -->
         <div class="rank_con fr">
@@ -93,6 +94,7 @@
             </ul>
         </div>
     </div>
+{% endblock %}
 
     <!-- 底部关于我们-->
     <div class="footer">

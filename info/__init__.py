@@ -104,5 +104,13 @@ def create_app(config_name):
     # 新闻详情页news
     from info.modules.news import news_blu
     app.register_blueprint(news_blu)
+
+    # 个人中心
+    from info.modules.profile import profile_blu
+    app.register_blueprint(profile_blu)
+
+
+
+
     # 必须返回app 给到manager接收
     return app
