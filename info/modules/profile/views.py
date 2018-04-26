@@ -1,6 +1,7 @@
 from flask import g, redirect, render_template, request, jsonify, current_app
 
-from info import constants
+from info import constants, db
+from info.models import Category, News
 from info.modules.profile import profile_blu
 from info.utils.common import user_login_data
 from info.utils.image_storage import storage
@@ -160,5 +161,130 @@ def user_collection():
 
     return render_template('news/user_collection.html', data=data)
 
+
+
+
+# 用户发布新闻
+@profile_blu.route('/news_release', methods=["get", "post"])
+@user_login_data
+def news_release():
+
+    if request.method == "GET":
+        # 加载新闻分类数据,有个下拉框选择发布的新闻种类
+        categories = []
+        try:
+            categories = Category.query.all()
+        except Exception as e:
+            current_app.logger.error(e)
+
+        category_dict_li = []
+        for category in categories:
+            category_dict_li.append(category.to_dict())
+
+        # 移除最新的分类
+        category_dict_li.pop(0)
+
+        return render_template('news/user_news_release.html', data={"categories": category_dict_li})
+
+    # 1. 获取要提交的数据
+    # 标题
+    title = request.form.get("title")
+    # 新闻来源
+    source = "个人发布"
+    # 摘要
+    digest = request.form.get("digest")
+    # 新闻内容
+    content = request.form.get("content")
+    # 索引图片
+    index_image = request.files.get("index_image")
+    # 分类id
+    category_id = request.form.get("category_id")
+
+    # 校验参数
+    # 2.1 判断数据是否有值
+    if not all([title, source, digest, content, index_image, category_id]):
+        # if not content:
+        #     print('not content')  # 是not content
+        # if not index_image:
+        #     print('not image')
+        return jsonify(errno=RET.PARAMERR, errmsg="参数缺失")
+
+    # 2.2
+    try:
+        category_id = int(category_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.PARAMERR, errmsg="参数类型不符")
+
+    # 3.取到图片，将图片上传到七牛云
+    try:
+        index_image_data = index_image.read()
+        # 上传到七牛云
+        key = storage(index_image_data)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.PARAMERR, errmsg="图片上传问题")
+
+    news = News()
+    news.title = title
+    news.digest = digest
+    news.source = source
+    news.content = content
+    news.index_image_url = constants.QINIU_DOMIN_PREFIX + key
+    news.category_id = category_id
+    news.user_id = g.user.id
+    # 1代表待审核状态
+    news.status = 1
+
+    try:
+        db.session.add(news)
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg="数据保存失败")
+
+    return jsonify(errno=RET.OK, errmsg="OK")
+
+
+
+# 用户已经发布的新闻列表,可以看到审核信息
+@profile_blu.route('/news_list')
+@user_login_data
+def user_news_list():
+
+    # 获取参数
+    page = request.args.get("p", 1)
+
+    # 判断参数
+    try:
+        page = int(page)
+    except Exception as e:
+        current_app.logger.error(e)
+        page = 1
+
+    user = g.user
+    news_list = []
+    current_page = 1
+    total_page = 1
+    try:
+        paginate = News.query.filter(News.user_id==user.id).paginate(page, constants.USER_COLLECTION_MAX_NEWS, False)
+        news_list = paginate.items
+        current_page = paginate.page
+        total_page = paginate.pages
+    except Exception as e:
+        current_app.logger.error(e)
+
+    news_dict_li = []
+    for news in news_list:
+        news_dict_li.append(news.to_review_dict())
+
+    data = {
+        "news_list": news_dict_li,
+        "total_page": total_page,
+        "current_page": current_page,
+    }
+
+    return render_template('news/user_news_list.html', data=data)
 
 
