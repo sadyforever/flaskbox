@@ -41,7 +41,7 @@
 {#                        {% endfor %}#}
 {#                    </a>#}
                     <img src="{% if data.user.avatar_url %}
-                        data.user_info.avatar_url
+                        {{ data.user.avatar_url }}
                     {% else %}
                     ../../static/news/images/person01.png
                     {% endif %}" class="lgin_pic">
