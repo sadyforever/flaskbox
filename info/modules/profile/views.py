@@ -1,7 +1,7 @@
-from flask import g, redirect, render_template, request, jsonify, current_app
+from flask import g, redirect, render_template, request, jsonify, current_app, session, abort
 
 from info import constants, db
-from info.models import Category, News
+from info.models import Category, News, User
 from info.modules.profile import profile_blu
 from info.utils.common import user_login_data
 from info.utils.image_storage import storage
@@ -45,6 +45,15 @@ def base_info():
     user.signature = signature
     user.nick_name = nick_name
     user.gender = gender
+    try:
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg="保存数据失败")
+
+        # 将 session 中保存的数据进行实时更新
+    session["nick_name"] = nick_name
 
     return jsonify(errno=RET.OK, errmsg="OK")
 
@@ -89,6 +98,12 @@ def pic_info():
 
     # 3. 保存头像地址
     user.avatar_url = key
+    try:
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg="保存用户数据错误")
     return jsonify(errno=RET.OK, errmsg="OK", data={"avatar_url": constants.QINIU_DOMIN_PREFIX + key})
 
 
@@ -115,6 +130,12 @@ def pass_info():
 
     # 4. 设置新密码
     user.password = news_password
+    try:
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg="保存数据失败")
 
     return jsonify(errno=RET.OK, errmsg="保存成功")
 
@@ -217,14 +238,14 @@ def news_release():
         return jsonify(errno=RET.PARAMERR, errmsg="参数类型不符")
 
     # 3.取到图片，将图片上传到七牛云
-    try:
-        index_image_data = index_image.read()
-        # 上传到七牛云
-        key = storage(index_image_data)
-    except Exception as e:
-        current_app.logger.error(e)
-        return jsonify(errno=RET.PARAMERR, errmsg="图片上传问题")
-
+    # try:
+    #     index_image_data = index_image.read()
+    #     # 上传到七牛云
+    #     key = storage(index_image_data)
+    # except Exception as e:
+    #     current_app.logger.error(e)
+    #     return jsonify(errno=RET.PARAMERR, errmsg="图片上传问题")
+    key = '12345678'
     news = News()
     news.title = title
     news.digest = digest
@@ -287,4 +308,128 @@ def user_news_list():
 
     return render_template('news/user_news_list.html', data=data)
 
+# 用户关注的作者
+@profile_blu.route('/user_follow')
+@user_login_data
+def user_follow():
+    # 获取页数
+    p = request.args.get("p", 1)
+    try:
+        p = int(p)
+    except Exception as e:
+        current_app.logger.error(e)
+        p = 1
 
+    # 取到当前登录用户
+    user = g.user
+
+    follows = []
+    current_page = 1
+    total_page = 1
+    try:
+        paginate = user.followed.paginate(p, constants.USER_FOLLOWED_MAX_COUNT, False)
+        # 获取当前页数据
+        follows = paginate.items
+        # 获取当前页
+        current_page = paginate.page
+        # 获取总页数
+        total_page = paginate.pages
+    except Exception as e:
+        current_app.logger.error(e)
+
+    user_dict_li = []
+
+    for follow_user in follows:
+        user_dict_li.append(follow_user.to_dict())
+
+    data = {
+        "users": user_dict_li,
+        "total_page": total_page,
+        "current_page": current_page
+    }
+
+    return render_template('news/user_follow.html', data=data)
+
+
+# 在新闻详情页或者用户关注页点击作者信息进到其他用户界面
+@profile_blu.route('/other_info')
+@user_login_data
+def other_info():
+
+    user = g.user
+
+    # 去查询其他人的用户信息
+    other_id = request.args.get("user_id")
+
+    if not other_id:
+        abort(404)
+
+    # 查询指定id的用户信息
+    try:
+        other = User.query.get(other_id)
+    except Exception as e:
+        current_app.logger.error(e)
+
+    if not other:
+        abort(404)
+
+    is_followed = False
+    # if 当前新闻有作者，并且 当前登录用户已关注过这个用户
+    if other and user:
+        # if user 是否关注过 news.user
+        if other in user.followed:
+            is_followed = True
+
+    data = {
+        "is_followed": is_followed,
+        "user": g.user.to_dict() if g.user else None,
+        "other_info": other.to_dict()
+    }
+    return render_template('news/other.html', data=data)
+# 进入其他用户界面展示用户发布的新闻
+@profile_blu.route('/other_news_list')
+def other_news_list():
+    """返回指定用户的发布的新闻"""
+
+    # 1. 取参数
+    other_id = request.args.get("user_id")
+    page = request.args.get("p", 1)
+
+    # 2. 判断参数
+    try:
+        page = int(page)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.PARAMERR, errmsg="参数错误")
+
+    try:
+        other = User.query.get(other_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="数据查询失败")
+
+    if not other:
+        return jsonify(errno=RET.NODATA, errmsg="当前用户不存在")
+
+    try:
+        paginate = other.news_list.paginate(page, constants.USER_COLLECTION_MAX_NEWS, False)
+        # 获取当前页数据
+        news_li = paginate.items
+        # 获取当前页
+        current_page = paginate.page
+        # 获取总页数
+        total_page = paginate.pages
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="数据查询失败")
+
+    news_dict_li = []
+    for news_item in news_li:
+        news_dict_li.append(news_item.to_basic_dict())
+
+    data = {
+        "news_list": news_dict_li,
+        "total_page": total_page,
+        "current_page": current_page
+    }
+    return jsonify(errno=RET.OK, errmsg="OK", data=data)

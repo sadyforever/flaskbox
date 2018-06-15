@@ -3,7 +3,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 # 初始化app和db的import
-from flask import Flask
+from flask import Flask, g, render_template
 # ext表示扩展extend 只不过它用的 . 形式
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
@@ -21,6 +21,7 @@ from config import config
 
 # 初始化数据库
 #  在Flask很多扩展里面都可以先初始化扩展的对象，然后再去调用 init_app 方法去初始化
+
 db = SQLAlchemy() # type :
 
 
@@ -88,7 +89,14 @@ def create_app(config_name):
         response.set_cookie('csrf_token',csrf_token)
         return response
 
-
+    from info.utils.common import user_login_data
+    # 如果原本的导入方式能运行,结果新导入的内容导致引入问题,那就把新导入的内容放在使用部分的上边
+    @app.errorhandler(404)
+    @user_login_data
+    def page_not_found(error):
+        user = g.user
+        data = {"user_info": user.to_dict() if user else None}
+        return render_template('news/404.html', data=data)
 
 
 
