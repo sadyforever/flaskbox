@@ -118,7 +118,7 @@ def create_app(config_name):
     app.register_blueprint(profile_blu)
     # 后台
     from info.modules.admin import admin_blu
-    app.register_blueprint(admin_blu)
+    app.register_blueprint(admin_blu,url_prefix="/admin")
 
 
     # 必须返回app 给到manager接收

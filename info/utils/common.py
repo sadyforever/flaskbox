@@ -1,7 +1,11 @@
 import functools
 
+import datetime
+import random
+
 from flask import session, current_app, g
 
+from info import db
 from info.models import User, News
 
 
@@ -70,3 +74,4 @@ def clickrank():
     for news in news_list:
         news_dict_li.append(news.to_basic_dict())
     return news_dict_li
+
