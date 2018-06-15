@@ -116,8 +116,9 @@ def create_app(config_name):
     # 个人中心
     from info.modules.profile import profile_blu
     app.register_blueprint(profile_blu)
-
-
+    # 后台
+    from info.modules.admin import admin_blu
+    app.register_blueprint(admin_blu)
 
 
     # 必须返回app 给到manager接收

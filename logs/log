@@ -3274,3 +3274,15 @@ INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskinformation
 INFO _internal.py:88  * Restarting with stat
 WARNING _internal.py:88  * Debugger is active!
 INFO _internal.py:88  * Debugger PIN: 220-351-647
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskinformation/flaskbox/info/__init__.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 220-351-647
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskinformation/flaskbox/info/modules/admin/__init__.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 220-351-647
+INFO _internal.py:88  * Detected change in '/Users/sady/Desktop/flaskinformation/flaskbox/info/modules/admin/__init__.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 220-351-647
