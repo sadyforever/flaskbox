@@ -35,7 +35,7 @@ def news_list():
     # 其他类: 其他类的所有(按照类别)
     # 我们创建一个过滤器的列表,之后把他当做查询条件放进去
     # 使用*args的格式就可以让 具体参数是列表中的内容 而不包括[]符号
-    filters = []
+    filters = [News.status == 0]
     if cid != 1:        #  查询的不是最新的数据
         # 需要添加的条件
         filters.append(News.category_id == cid)
